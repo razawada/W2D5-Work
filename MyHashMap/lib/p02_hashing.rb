@@ -35,10 +35,12 @@ class String
   def hash
     alphabet = ('a'..'z').to_a
     str_array = self.split("")
-    str_array.each do |ch|
-      ch = alphabet.index(ch.downcase)
+    num_array = []
+    str_array.each do |char_index|
+      char_index = alphabet.index(char_index.downcase)
+      num_array << char_index
     end
-    str_array.hash
+    num_array.hash
   end
 end
 
@@ -46,6 +48,10 @@ class Hash
   # This returns 0 because rspec will break if it returns nil
   # Make sure to implement an actual Hash#hash method
   def hash
-    0
+    sorted_self = self.sort_by {|k,v| k}
+    hash = sorted_self.map {|array| array.hash}
+    hash.hash
+    # 0
+    # return 0 if hash.nil?
   end
 end
